@@ -18,6 +18,9 @@ Scanner::Scanner(QWidget *parent, Qt::WFlags flags)
 
     connect(&_dynamicButtons, SIGNAL(sendBtnClkByInx(int)), this, SLOT(btnClked(int)));
     connect(_ui.actionSettings, SIGNAL(triggered()), this, SLOT(showSetting()));
+
+    showSetting();
+    scanVehicles();
 }
 
 Scanner::~Scanner()

@@ -68,7 +68,7 @@ void Manager::scannerInit()
     _scannerPresenter->setObjectName("ScannerPresenter");
     addWindow(_scannerPresenter->objectName(), _scannerWindow);
 
-    connect(_scannerWindow->thread(), SIGNAL(finished()), _scannerPresenter, SLOT(show()));
+    connect(_scannerWindow->thread(), SIGNAL(finished()), _scannerPresenter, SLOT(show()), Qt::QueuedConnection);
     connect(_scannerPresenter, SIGNAL(switchWindow()), this, SLOT(switchWindow()));
 }
 
@@ -77,13 +77,13 @@ void Manager::msgBoxInit()
     _msgBoxPresenter = new MessageBoxPresenter(this);
     _msgBox = new MessageBox();
 
-    connect(_msgBoxPresenter, SIGNAL(sendShow()), _msgBox, SLOT(show()));
-    connect(_msgBoxPresenter, SIGNAL(sendHide()), _msgBox, SLOT(hide()));
-    connect(_msgBoxPresenter, SIGNAL(sendAddBtn(QString)), _msgBox->dynamicButtons(), SLOT(addBtn(QString)));
-    connect(_msgBoxPresenter, SIGNAL(sendBtnClr()), _msgBox->dynamicButtons(), SLOT(btnClr()));
-    connect(_msgBoxPresenter, SIGNAL(sendSetMsg(QString)), _msgBox, SLOT(setMsg(QString)));
-    connect(_msgBoxPresenter, SIGNAL(sendSetTitle(QString)), _msgBox, SLOT(setTitle(QString)));
-    connect(_msgBox->dynamicButtons(), SIGNAL(sendBtnClk(QString)), _msgBox->dynamicButtons(), SLOT(defaultBtnClked(QString)));
+    connect(_msgBoxPresenter, SIGNAL(sendShow()), _msgBox, SLOT(show()), Qt::QueuedConnection);
+    connect(_msgBoxPresenter, SIGNAL(sendHide()), _msgBox, SLOT(hide()), Qt::QueuedConnection);
+    connect(_msgBoxPresenter, SIGNAL(sendAddBtn(QString)), _msgBox->dynamicButtons(), SLOT(addBtn(QString)), Qt::QueuedConnection);
+    connect(_msgBoxPresenter, SIGNAL(sendBtnClr()), _msgBox->dynamicButtons(), SLOT(btnClr()), Qt::QueuedConnection);
+    connect(_msgBoxPresenter, SIGNAL(sendSetMsg(QString)), _msgBox, SLOT(setMsg(QString)), Qt::QueuedConnection);
+    connect(_msgBoxPresenter, SIGNAL(sendSetTitle(QString)), _msgBox, SLOT(setTitle(QString)), Qt::QueuedConnection);
+    connect(_msgBox->dynamicButtons(), SIGNAL(sendBtnClk(QString)), _msgBox->dynamicButtons(), SLOT(defaultBtnClked(QString)), Qt::QueuedConnection);
 }
 
 void Manager::menuInit()
@@ -94,8 +94,8 @@ void Manager::menuInit()
     _menuPresenter->setObjectName("MenuPresenter");
     addWindow(_menuPresenter->objectName(), _menu);
 
-    connect(_menuPresenter, SIGNAL(sendAddItem(QString)), _menu, SLOT(addItem(QString)));
-    connect(_menuPresenter, SIGNAL(sendItemClr()), _menu, SLOT(itemClr()));
+    connect(_menuPresenter, SIGNAL(sendAddItem(QString)), _menu, SLOT(addItem(QString)), Qt::QueuedConnection);
+    connect(_menuPresenter, SIGNAL(sendItemClr()), _menu, SLOT(itemClr()), Qt::QueuedConnection);
     connect(_menuPresenter, SIGNAL(switchWindow()), this, SLOT(switchWindow()));
 }
 
@@ -135,7 +135,7 @@ void Manager::liveDataPrepareInit()
     _liveDataPreparePresenter->setObjectName("LiveDataPreparePresenter");
     addWindow(_liveDataPreparePresenter->objectName(), _liveDataPrepare);
 
-    connect(_liveDataPreparePresenter, SIGNAL(sendShow()), _liveDataPrepare, SLOT(show()));
+    connect(_liveDataPreparePresenter, SIGNAL(sendShow()), _liveDataPrepare, SLOT(show()), Qt::QueuedConnection);
     connect(_liveDataPreparePresenter, SIGNAL(switchWindow()), this, SLOT(switchWindow()));
 }
 
@@ -147,10 +147,10 @@ void Manager::liveDataInit()
     _liveDataPresenter->setObjectName("LiveDataPresenter");
     addWindow(_liveDataPresenter->objectName(), _liveData);
 
-    connect(_liveDataPresenter, SIGNAL(sendSetValue(int, QString)), _liveData, SLOT(setValue(int, QString)));
+    connect(_liveDataPresenter, SIGNAL(sendSetValue(int, QString)), _liveData, SLOT(setValue(int, QString)), Qt::QueuedConnection);
     connect(_liveDataPresenter, SIGNAL(switchWindow()), this, SLOT(switchWindow()));
-    connect(_liveDataPresenter, SIGNAL(sendAddBtn(QString)), _liveData->dynamicButtons(), SLOT(addBtn(QString)));
-    connect(_liveDataPresenter, SIGNAL(sendBtnClr()), _liveData->dynamicButtons(), SLOT(btnClr()));
+    connect(_liveDataPresenter, SIGNAL(sendAddBtn(QString)), _liveData->dynamicButtons(), SLOT(addBtn(QString)), Qt::QueuedConnection);
+    connect(_liveDataPresenter, SIGNAL(sendBtnClr()), _liveData->dynamicButtons(), SLOT(btnClr()), Qt::QueuedConnection);
 }
 
 void Manager::addWindow(const QString &key, QWidget *widget)
