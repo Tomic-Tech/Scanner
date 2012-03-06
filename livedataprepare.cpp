@@ -6,7 +6,7 @@ LiveDataPrepare::LiveDataPrepare(QWidget *parent /* = 0 */)
     : QWidget(parent)
     , _ui()
     , _dynamicButtons(Qt::Vertical, this)
-    , _model(LiveDataModel::PrepareMode)
+    , _model(0)
     , _delegate(LiveDataDelegate::PrepareMode)
 {
     _ui.setupUi(this);
@@ -16,8 +16,14 @@ LiveDataPrepare::LiveDataPrepare(QWidget *parent /* = 0 */)
     _dynamicButtons.addBtn(trUtf8("Back"));
 
     connect(&_dynamicButtons, SIGNAL(sendBtnClkByInx(int)), this, SLOT(btnClked(int)));
-    _ui.tableView->setModel(&_model);
+    _ui.tableView->setModel(_model);
     _ui.tableView->setItemDelegate(&_delegate);
+}
+
+LiveDataPrepare::~LiveDataPrepare()
+{
+    if (_model != NULL)
+        delete _model;
 }
 
 void LiveDataPrepare::btnClked(int index)
@@ -43,9 +49,9 @@ void LiveDataPrepare::btnClked(int index)
         }
         break;
     case 1:
-        for (int i = 0; i < _model.rowCount(); i++)
+        for (int i = 0; i < _model->rowCount(); i++)
         {
-            _model.setData(_model.index(i, 0), QVariant(true), Qt::CheckStateRole);
+            _model->setData(_model->index(i, 0), QVariant(true), Qt::CheckStateRole);
         }
         break;
     case 2:
@@ -65,3 +71,15 @@ void LiveDataPrepare::changeEvent(QEvent *event)
         QWidget::changeEvent(event);
     }
 }
+
+void LiveDataPrepare::showEvent(QShowEvent *event)
+{
+    jm_ld_array_generate_enabled_index();
+    LiveDataModel *model = _model;
+    _model = new LiveDataModel(LiveDataModel::PrepareMode);
+    _ui.tableView->setModel(_model);
+    if (model != NULL)
+        delete model;
+    QWidget::showEvent(event);
+}
+

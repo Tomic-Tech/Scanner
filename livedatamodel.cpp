@@ -10,7 +10,14 @@ LiveDataModel::LiveDataModel(Mode mode, QObject *parent /* = 0 */)
 
 int LiveDataModel::rowCount(const QModelIndex &parent) const
 {
-    return jm_ld_array_size();
+    if (_mode == PrepareMode)
+    {
+        return jm_ld_array_enabled_size();
+    }
+    else
+    {
+        return jm_ld_array_show_size();
+    }
 }
 
 int LiveDataModel::columnCount(const QModelIndex &parent) const
@@ -37,17 +44,17 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
         case Qt::DisplayRole:
             if (index.column() == 0)
             {
-                return QString::fromUtf8(jm_ld_array_get_short_name(index.row()));
+                return QString::fromUtf8(jm_ld_array_get_short_name(jm_ld_array_get_enabled_index(index.row())));
             }
             if (index.column() == 1)
             {
-                return QString::fromUtf8(jm_ld_array_get_content(index.row()));
+                return QString::fromUtf8(jm_ld_array_get_content(jm_ld_array_get_enabled_index(index.row())));
             }
             break;
         case Qt::CheckStateRole:
             if (index.column() == 0)
             {
-                return jm_ld_array_get_enabled(index.row()) ? Qt::Checked : Qt::Unchecked;
+                return jm_ld_array_get_enabled(jm_ld_array_get_enabled_index(index.row())) ? Qt::Checked : Qt::Unchecked;
             }
         }
     }
@@ -57,23 +64,23 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
         {
             if (index.column() == 0)
             {
-                return QString::fromUtf8(jm_ld_array_get_short_name(index.row()));
+                return QString::fromUtf8(jm_ld_array_get_short_name(jm_ld_array_get_show_index(index.row())));
             }
             else if (index.column() == 1)
             {
-                return QString::fromUtf8(jm_ld_array_get_content(index.row()));
+                return QString::fromUtf8(jm_ld_array_get_content(jm_ld_array_get_show_index(index.row())));
             }
             else if (index.column() == 2)
             {
-                return QString::fromUtf8(jm_ld_array_get_value(index.row()));
+                return QString::fromUtf8(jm_ld_array_get_value(jm_ld_array_get_show_index(index.row())));
             }
             else if (index.column() == 3)
             {
-                return QString::fromUtf8(jm_ld_array_get_unit(index.row()));
+                return QString::fromUtf8(jm_ld_array_get_unit(jm_ld_array_get_show_index(index.row())));
             }
             else if (index.column() == 4)
             {
-                return QString::fromUtf8(jm_ld_array_get_default_value(index.row()));
+                return QString::fromUtf8(jm_ld_array_get_default_value(jm_ld_array_get_show_index(index.row())));
             }
         }
     }
@@ -84,7 +91,7 @@ void LiveDataModel::setData(int index, const QString &value)
 {
     if (_mode == PrepareMode)
         return;
-    setData(this->index(index, 2), QVariant(value));
+    setData(this->index(jm_ld_array_get_show_position(index), 2), QVariant(value));
 }
 
 bool LiveDataModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -101,18 +108,18 @@ bool LiveDataModel::setData(const QModelIndex &index, const QVariant &value, int
             {
                 if (value.type() == QVariant::String)
                 {
-                    jm_ld_array_set_short_name(index.row(), value.toString().toUtf8().data());
+                    jm_ld_array_set_short_name(jm_ld_array_get_enabled_index(index.row()), value.toString().toUtf8().data());
                 }
                 else
                 {
-                    jm_ld_array_set_enabled(index.row(), value.toBool() ? TRUE : FALSE);
+                    jm_ld_array_set_enabled(jm_ld_array_get_enabled_index(index.row()), value.toBool() ? TRUE : FALSE);
                 }
                 emit dataChanged(index, index);
             }
 
             if (index.column() == 1)
             {
-                jm_ld_array_set_content(index.row(), value.toString().toUtf8().data());
+                jm_ld_array_set_content(jm_ld_array_get_enabled_index(index.row()), value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             break;
@@ -132,27 +139,27 @@ bool LiveDataModel::setData(const QModelIndex &index, const QVariant &value, int
         {
             if (index.column() == 0)
             {
-                jm_ld_array_set_short_name(index.row(), value.toString().toUtf8().data());
+                jm_ld_array_set_short_name(jm_ld_array_get_show_index(index.row()), value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             if (index.column() == 1)
             {
-                jm_ld_array_set_content(index.row(), value.toString().toUtf8().data());
+                jm_ld_array_set_content(jm_ld_array_get_show_index(index.row()), value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             if (index.column() == 2)
             {
-                jm_ld_array_set_value(index.row(), value.toString().toUtf8().data());
+                jm_ld_array_set_value(jm_ld_array_get_show_index(index.row()), value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             if (index.column() == 3)
             {
-                jm_ld_array_set_unit(index.row(), value.toString().toUtf8().data());
+                jm_ld_array_set_unit(jm_ld_array_get_show_index(index.row()), value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             if (index.column() == 4)
             {
-                jm_ld_array_set_default_value(index.row(), value.toString().toUtf8().data());
+                jm_ld_array_set_default_value(jm_ld_array_get_show_index(index.row()), value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             return true;

@@ -12,16 +12,17 @@ class LiveDataPrepare : public QWidget
     Q_OBJECT
 public:
     explicit LiveDataPrepare(QWidget *parent = 0);
+    ~LiveDataPrepare();
 public slots:
-    
 protected:
     void changeEvent(QEvent *event);
+    void showEvent(QShowEvent *event);
 private slots:
     void btnClked(int index);
 private:
     Ui::LiveDataPrepareClass _ui;
     DynamicButtons _dynamicButtons;
-    LiveDataModel _model;
+    LiveDataModel *_model;
     LiveDataDelegate _delegate;
 };
 

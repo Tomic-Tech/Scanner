@@ -8,5 +8,5 @@ LiveDataPreparePresenter::LiveDataPreparePresenter(QObject *parent /* = 0 */)
 
 void LiveDataPreparePresenter::show()
 {
-    emit sendShow();
+    emit switchWindow();
 }

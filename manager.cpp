@@ -49,6 +49,7 @@ Manager::~Manager()
     delete _msgBox;
     delete _scannerPresenter;
     delete _scannerWindow;
+    jm_lib_destroy();
 }
 
 void Manager::loadTranslateFiles()
@@ -135,7 +136,7 @@ void Manager::liveDataPrepareInit()
     _liveDataPreparePresenter->setObjectName("LiveDataPreparePresenter");
     addWindow(_liveDataPreparePresenter->objectName(), _liveDataPrepare);
 
-    connect(_liveDataPreparePresenter, SIGNAL(sendShow()), _liveDataPrepare, SLOT(show()), Qt::QueuedConnection);
+    //connect(_liveDataPreparePresenter, SIGNAL(sendShow()), _liveDataPrepare, SLOT(show()), Qt::QueuedConnection);
     connect(_liveDataPreparePresenter, SIGNAL(switchWindow()), this, SLOT(switchWindow()));
 }
 
@@ -151,6 +152,7 @@ void Manager::liveDataInit()
     connect(_liveDataPresenter, SIGNAL(switchWindow()), this, SLOT(switchWindow()));
     connect(_liveDataPresenter, SIGNAL(sendAddBtn(QString)), _liveData->dynamicButtons(), SLOT(addBtn(QString)), Qt::QueuedConnection);
     connect(_liveDataPresenter, SIGNAL(sendBtnClr()), _liveData->dynamicButtons(), SLOT(btnClr()), Qt::QueuedConnection);
+    connect(_liveData->dynamicButtons(), SIGNAL(sendBtnClk(QString)), _liveData->dynamicButtons(), SLOT(defaultBtnClked(QString)));
 }
 
 void Manager::addWindow(const QString &key, QWidget *widget)

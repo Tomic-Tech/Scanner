@@ -14,15 +14,18 @@ class LiveData : public QWidget
 
 public:
     explicit LiveData(QWidget *parent = 0);
+    ~LiveData();
     DynamicButtons* dynamicButtons();
 public slots:
     void setValue(int index, const QString &value);
 protected:
     void changeEvent(QEvent *event);
+    void showEvent(QShowEvent *event);
+    void hideEvent(QHideEvent *event);
 private:
     Ui::LiveDataClass _ui;
     DynamicButtons _dynamicButtons;
-    LiveDataModel _model;
+    LiveDataModel *_model;
     LiveDataDelegate _delegate;
 };
 
