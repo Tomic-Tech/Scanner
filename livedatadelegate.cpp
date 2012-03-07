@@ -25,7 +25,7 @@ void LiveDataDelegate::updateEditorGeometry(QWidget *editor,
     else
     {
         if (jm_ld_array_get_enabled(index.row()) &&
-            jm_ld_array_get_show(index.row()))
+            jm_ld_array_get_showed(index.row()))
         {
             editor->setGeometry(option.rect);
         }

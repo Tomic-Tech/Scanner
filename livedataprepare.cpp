@@ -74,7 +74,7 @@ void LiveDataPrepare::changeEvent(QEvent *event)
 
 void LiveDataPrepare::showEvent(QShowEvent *event)
 {
-    jm_ld_array_generate_enabled_index();
+    jm_ld_array_deploy_enabled_index();
     LiveDataModel *model = _model;
     _model = new LiveDataModel(LiveDataModel::PrepareMode);
     _ui.tableView->setModel(_model);

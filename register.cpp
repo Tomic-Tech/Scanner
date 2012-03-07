@@ -8,7 +8,7 @@ Register::Register(QWidget *parent /* = 0 */, Qt::WFlags flags /* = 0 */)
     connect(_ui.quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
     connect(_ui.okButton, SIGNAL(clicked()), this, SLOT(onOk()));
 
-    gchar *idCode = jm_auth_get_id_code();
+    gchar *idCode = jm_auth_query_id_code();
     _ui.idCode->setText(QString::fromUtf8(idCode));
     g_free(idCode);
 }
@@ -21,5 +21,5 @@ Register::~Register()
 void Register::onOk()
 {
     QString reg = _ui.regText->toPlainText();
-    jm_auth_write_register(reg.toUtf8().data());
+    jm_auth_save_reg(reg.toUtf8().data());
 }
