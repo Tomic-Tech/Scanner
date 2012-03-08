@@ -13,6 +13,7 @@ LiveData::LiveData(QWidget *parent /* = 0 */)
 
     _ui.liveDataTable->setModel(_model);
     _ui.liveDataTable->setItemDelegate(&_delegate);
+    _ui.liveDataTable->setWordWrap(true);
 }
 
 LiveData::~LiveData()

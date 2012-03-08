@@ -82,7 +82,7 @@ void Scanner::on_vehicleList_doubleClicked(const QModelIndex &index)
             _thread.init(v.vehiclePath(),
                 v.vehiclePath(),
                 v.vehiclePath());
-            _thread.start();
+            _thread.start(QThread::IdlePriority);
         }
     }
 }

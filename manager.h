@@ -1,7 +1,9 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
+#include <jm/jmui.h>
 #include <QtGui>
+#include <QtCore>
 #include <QTranslator>
 #include "scanner.h"
 #include "scannerpresenter.h"
@@ -16,7 +18,7 @@
 #include "livedata.h"
 #include "livedatapresenter.h"
 
-class UIThread;
+//class UIThread;
 
 class Manager : public QApplication
 {
@@ -41,9 +43,12 @@ private:
     void troubleCodeInit();
     void liveDataPrepareInit();
     void liveDataInit();
+    void dealMsg(JMUIMessage *msg);
 public slots:
     void switchWindow();
     int exec();
+private slots:
+    void uiUpdate();
 private:
     QWidget *_currentWindow;
     QHash<QString, QWidget*> _windowHash;
@@ -65,7 +70,8 @@ private:
     LiveData *_liveData;
     LiveDataPresenter *_liveDataPresenter;
 
-    UIThread *_thread;
+    QTimer *_uiTimer;
+    //UIThread *_thread;
 };
 
 #endif
