@@ -8,7 +8,6 @@ Manager::Manager(int &argc, char **argv)
     : QApplication(argc, argv)
     , _currentWindow(0)
     , _windowHash()
-    //, _thread(new UIThread(this))
     , _uiTimer(new QTimer(this))
 {
     QString dir = qApp->applicationDirPath().append(G_DIR_SEPARATOR_S);

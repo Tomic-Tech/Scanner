@@ -7,6 +7,7 @@ Scanner::Scanner(QWidget *parent, Qt::WFlags flags)
     , _delegate(this)
     , _dynamicButtons(Qt::Vertical, this)
     , _thread(this)
+    , _setting(this)
 {
 	_ui.setupUi(this);
 
@@ -30,8 +31,7 @@ Scanner::~Scanner()
 
 void Scanner::showSetting()
 {
-    Setting setting;
-    setting.exec();
+    _setting.exec();
 }
 
 void Scanner::scanVehicles()

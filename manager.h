@@ -17,8 +17,7 @@
 #include "livedatapreparepresenter.h"
 #include "livedata.h"
 #include "livedatapresenter.h"
-
-//class UIThread;
+#include "setting.h"
 
 class Manager : public QApplication
 {
@@ -71,7 +70,6 @@ private:
     LiveDataPresenter *_liveDataPresenter;
 
     QTimer *_uiTimer;
-    //UIThread *_thread;
 };
 
 #endif

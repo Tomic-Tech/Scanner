@@ -34,6 +34,7 @@ private:
     VehicleDelegate _delegate;
     DynamicButtons _dynamicButtons;
     VehicleThread _thread;
+    Setting _setting;
 };
 
 #endif // SCANNER_H
