@@ -6,37 +6,37 @@
     <message>
         <location filename="livedata.ui" line="14"/>
         <source>LiveData</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>LiveDataModel</name>
     <message>
-        <location filename="livedatamodel.cpp" line="241"/>
-        <location filename="livedatamodel.cpp" line="255"/>
-        <source>Short Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="livedatamodel.cpp" line="245"/>
-        <location filename="livedatamodel.cpp" line="259"/>
-        <source>Content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="livedatamodel.cpp" line="263"/>
-        <source>Value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="livedatamodel.cpp" line="267"/>
-        <source>Unit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <location filename="livedatamodel.cpp" line="257"/>
         <location filename="livedatamodel.cpp" line="271"/>
+        <source>Short Name</source>
+        <translation>Abbreviation</translation>
+    </message>
+    <message>
+        <location filename="livedatamodel.cpp" line="261"/>
+        <location filename="livedatamodel.cpp" line="275"/>
+        <source>Content</source>
+        <translation>Content</translation>
+    </message>
+    <message>
+        <location filename="livedatamodel.cpp" line="279"/>
+        <source>Value</source>
+        <translation>Current Value</translation>
+    </message>
+    <message>
+        <location filename="livedatamodel.cpp" line="283"/>
+        <source>Unit</source>
+        <translation>Unit</translation>
+    </message>
+    <message>
+        <location filename="livedatamodel.cpp" line="287"/>
         <source>Default Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Default Value</translation>
     </message>
 </context>
 <context>
@@ -44,17 +44,17 @@
     <message>
         <location filename="livedataprepare.cpp" line="14"/>
         <source>Enter</source>
-        <translation type="unfinished">Enter</translation>
+        <translation>Enter</translation>
     </message>
     <message>
         <location filename="livedataprepare.cpp" line="15"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Select All</translation>
     </message>
     <message>
         <location filename="livedataprepare.cpp" line="16"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Back</translation>
     </message>
 </context>
 <context>
@@ -62,13 +62,13 @@
     <message>
         <location filename="livedataprepare.ui" line="14"/>
         <source>Live Data Prepare</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>Manager</name>
     <message>
-        <location filename="manager.cpp" line="17"/>
+        <location filename="manager.cpp" line="16"/>
         <source>JMScanner</source>
         <translation>C168II</translation>
     </message>
@@ -78,12 +78,12 @@
     <message>
         <location filename="menu.cpp" line="13"/>
         <source>Enter</source>
-        <translation type="unfinished">Enter</translation>
+        <translation>Enter</translation>
     </message>
     <message>
         <location filename="menu.cpp" line="14"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Back</translation>
     </message>
 </context>
 <context>
@@ -91,7 +91,7 @@
     <message>
         <location filename="menu.ui" line="14"/>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -99,12 +99,12 @@
     <message>
         <location filename="messagebox.ui" line="14"/>
         <source>MessageBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Message Box</translation>
     </message>
     <message>
         <location filename="messagebox.ui" line="26"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -123,22 +123,27 @@
         <translation>C168II Register</translation>
     </message>
     <message>
-        <location filename="register.ui" line="25"/>
+        <location filename="register.ui" line="23"/>
+        <source>Please send ID Code and your Customer ID to it@c-168.com for register</source>
+        <translation>Please send ID Code and your Customer ID to it@c-168.com for register</translation>
+    </message>
+    <message>
+        <location filename="register.ui" line="35"/>
         <source>ID Code</source>
         <translation>ID Code</translation>
     </message>
     <message>
-        <location filename="register.ui" line="46"/>
+        <location filename="register.ui" line="56"/>
         <source>Register</source>
         <translation>Register</translation>
     </message>
     <message>
-        <location filename="register.ui" line="76"/>
+        <location filename="register.ui" line="86"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="register.ui" line="83"/>
+        <location filename="register.ui" line="93"/>
         <source>Quit</source>
         <translation>Quit</translation>
     </message>
@@ -146,13 +151,13 @@
 <context>
     <name>Scanner</name>
     <message>
-        <location filename="scanner.cpp" line="16"/>
+        <location filename="scanner.cpp" line="17"/>
         <location filename="scanner.cpp" line="108"/>
         <source>Enter</source>
         <translation>Enter</translation>
     </message>
     <message>
-        <location filename="scanner.cpp" line="17"/>
+        <location filename="scanner.cpp" line="18"/>
         <location filename="scanner.cpp" line="109"/>
         <source>Quit</source>
         <translation>Quit</translation>
@@ -234,7 +239,7 @@
     <message>
         <location filename="troublecode.ui" line="14"/>
         <source>Trouble Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Trouble Code</translation>
     </message>
 </context>
 <context>
@@ -242,12 +247,12 @@
     <message>
         <location filename="troublecodemodel.cpp" line="95"/>
         <source>Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Code</translation>
     </message>
     <message>
         <location filename="troublecodemodel.cpp" line="97"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Content</translation>
     </message>
 </context>
 <context>

@@ -12,29 +12,29 @@
 <context>
     <name>LiveDataModel</name>
     <message>
-        <location filename="livedatamodel.cpp" line="241"/>
-        <location filename="livedatamodel.cpp" line="255"/>
+        <location filename="livedatamodel.cpp" line="257"/>
+        <location filename="livedatamodel.cpp" line="271"/>
         <source>Short Name</source>
-        <translation>简写</translation>
+        <translation>缩写</translation>
     </message>
     <message>
-        <location filename="livedatamodel.cpp" line="245"/>
-        <location filename="livedatamodel.cpp" line="259"/>
+        <location filename="livedatamodel.cpp" line="261"/>
+        <location filename="livedatamodel.cpp" line="275"/>
         <source>Content</source>
         <translation>内容</translation>
     </message>
     <message>
-        <location filename="livedatamodel.cpp" line="263"/>
+        <location filename="livedatamodel.cpp" line="279"/>
         <source>Value</source>
         <translation>当前值</translation>
     </message>
     <message>
-        <location filename="livedatamodel.cpp" line="267"/>
+        <location filename="livedatamodel.cpp" line="283"/>
         <source>Unit</source>
         <translation>单位</translation>
     </message>
     <message>
-        <location filename="livedatamodel.cpp" line="271"/>
+        <location filename="livedatamodel.cpp" line="287"/>
         <source>Default Value</source>
         <translation>标准值</translation>
     </message>
@@ -68,7 +68,7 @@
 <context>
     <name>Manager</name>
     <message>
-        <location filename="manager.cpp" line="17"/>
+        <location filename="manager.cpp" line="16"/>
         <source>JMScanner</source>
         <translation>C168II</translation>
     </message>
@@ -123,22 +123,27 @@
         <translation>C168II 注册</translation>
     </message>
     <message>
-        <location filename="register.ui" line="25"/>
+        <location filename="register.ui" line="23"/>
+        <source>Please send ID Code and your Customer ID to it@c-168.com for register</source>
+        <translation>请把ID号和您的客户服务号发送至it@c-168.com获取注册码</translation>
+    </message>
+    <message>
+        <location filename="register.ui" line="35"/>
         <source>ID Code</source>
         <translation>ID号</translation>
     </message>
     <message>
-        <location filename="register.ui" line="46"/>
+        <location filename="register.ui" line="56"/>
         <source>Register</source>
         <translation>注册</translation>
     </message>
     <message>
-        <location filename="register.ui" line="76"/>
+        <location filename="register.ui" line="86"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="register.ui" line="83"/>
+        <location filename="register.ui" line="93"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
@@ -146,13 +151,13 @@
 <context>
     <name>Scanner</name>
     <message>
-        <location filename="scanner.cpp" line="16"/>
+        <location filename="scanner.cpp" line="17"/>
         <location filename="scanner.cpp" line="108"/>
         <source>Enter</source>
         <translation>进入</translation>
     </message>
     <message>
-        <location filename="scanner.cpp" line="17"/>
+        <location filename="scanner.cpp" line="18"/>
         <location filename="scanner.cpp" line="109"/>
         <source>Quit</source>
         <translation>退出</translation>
