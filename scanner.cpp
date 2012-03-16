@@ -1,5 +1,6 @@
 #include "scanner.h"
 #include <jm/jmlib.h>
+#include "register.h"
 
 Scanner::Scanner(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
@@ -19,6 +20,7 @@ Scanner::Scanner(QWidget *parent, Qt::WFlags flags)
 
     connect(&_dynamicButtons, SIGNAL(sendBtnClkByInx(int)), this, SLOT(btnClked(int)));
     connect(_ui.actionSettings, SIGNAL(triggered()), this, SLOT(showSetting()));
+    connect(_ui.actionRegister, SIGNAL(triggered()), this, SLOT(showRegister()));
 
     showSetting();
     scanVehicles();
@@ -34,10 +36,16 @@ void Scanner::showSetting()
     _setting.exec();
 }
 
+void Scanner::showRegister()
+{
+    Register r;
+    r.exec();
+}
+
 void Scanner::scanVehicles()
 {
     _model.removeRows(0, _model.rowCount());
-    QDir dir(QString::fromUtf8(jm_lib_vehicles_dir()));
+    QDir dir(QString::fromUtf8(jm_vehicles_dir()));
     if (dir.exists())
     {
         dir.setFilter(QDir::Dirs | QDir::NoSymLinks);

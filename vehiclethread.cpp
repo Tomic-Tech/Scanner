@@ -22,7 +22,7 @@ void VehicleThread::init(const QString &name, const QString &path,
 
 void VehicleThread::run()
 {    
-    jm_load_vehicle_script(_name.toUtf8().data(),
+    jm_vehicle_load_script(_name.toUtf8().data(),
         _path.toUtf8().data(),
         _dbName.toUtf8().data());
 }

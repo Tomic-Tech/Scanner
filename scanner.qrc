@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="Scanner">
     <file>images/settings.png</file>
+    <file>images/register.png</file>
   </qresource>
 </RCC>

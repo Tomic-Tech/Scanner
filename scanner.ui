@@ -25,6 +25,9 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here is the vehicle list, you can double click the item to run diagnose or click the [Enter] button&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -34,6 +37,9 @@
           <family>微软雅黑</family>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Description of vehicle&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="readOnly">
          <bool>true</bool>
@@ -45,6 +51,21 @@
    </layout>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>48</width>
+     <height>48</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -52,6 +73,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionSettings"/>
+   <addaction name="actionRegister"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSettings">
@@ -63,7 +85,19 @@
     <string>Settings</string>
    </property>
    <property name="toolTip">
-    <string>C168II Configuration</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Configuration&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionRegister">
+   <property name="icon">
+    <iconset resource="scanner.qrc">
+     <normaloff>:/Scanner/images/register.png</normaloff>:/Scanner/images/register.png</iconset>
+   </property>
+   <property name="text">
+    <string>Register</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Manager Your Register&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </action>
  </widget>

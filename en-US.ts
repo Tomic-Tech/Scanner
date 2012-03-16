@@ -151,14 +151,14 @@
 <context>
     <name>Scanner</name>
     <message>
-        <location filename="scanner.cpp" line="17"/>
-        <location filename="scanner.cpp" line="108"/>
+        <location filename="scanner.cpp" line="18"/>
+        <location filename="scanner.cpp" line="116"/>
         <source>Enter</source>
         <translation>Enter</translation>
     </message>
     <message>
-        <location filename="scanner.cpp" line="18"/>
-        <location filename="scanner.cpp" line="109"/>
+        <location filename="scanner.cpp" line="19"/>
+        <location filename="scanner.cpp" line="117"/>
         <source>Quit</source>
         <translation>Quit</translation>
     </message>
@@ -171,14 +171,38 @@
         <translation>C168II Scanner</translation>
     </message>
     <message>
-        <location filename="scanner.ui" line="63"/>
+        <location filename="scanner.ui" line="29"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here is the vehicle list, you can double click the item to run diagnose or click the [Enter] button&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here is the vehicle list, you can double click the item to run diagnose or click the [Enter] button&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="scanner.ui" line="42"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Description of vehicle&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Description of vehicle&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="scanner.ui" line="85"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="scanner.ui" line="66"/>
+        <location filename="scanner.ui" line="88"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Configuration&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Configuration&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="scanner.ui" line="97"/>
+        <source>Register</source>
+        <translation>Register</translation>
+    </message>
+    <message>
+        <location filename="scanner.ui" line="100"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Manager Your Register&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Manager Your Register&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
         <source>C168II Configuration</source>
-        <translation>C168II Configuration</translation>
+        <translation type="obsolete">C168II Configuration</translation>
     </message>
 </context>
 <context>

@@ -23,6 +23,7 @@ protected:
     void changeEvent(QEvent *event);
 private slots:
     void showSetting();
+    void showRegister();
     void on_vehicleList_clicked(const QModelIndex &index);
     void on_vehicleList_doubleClicked(const QModelIndex &index);
     void btnClked(int index);

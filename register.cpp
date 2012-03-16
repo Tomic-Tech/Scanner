@@ -5,7 +5,7 @@ Register::Register(QWidget *parent /* = 0 */, Qt::WFlags flags /* = 0 */)
     : QDialog(parent, flags)
 {
     _ui.setupUi(this);
-    connect(_ui.quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
+    //connect(_ui.quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
     connect(_ui.okButton, SIGNAL(clicked()), this, SLOT(onOk()));
 
     gchar *idCode = jm_auth_query_id_code();
