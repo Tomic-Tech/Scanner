@@ -1,7 +1,6 @@
 #include "vehicle.h"
 #include <QFile>
 #include <jm/jmlib.h>
-#include <jm/jmauth.h>
 #include <QtDebug>
 #include <QLocale>
 #include "utils.h"

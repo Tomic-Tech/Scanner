@@ -1,6 +1,5 @@
 #include "manager.h"
 #include <jm/jmlib.h>
-#include <jm/jmauth.h>
 #include "register.h"
 #include "utils.h"
 

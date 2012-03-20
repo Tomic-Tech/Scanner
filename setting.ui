@@ -94,6 +94,11 @@
            <string>TL718</string>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>V2</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>

@@ -1,5 +1,5 @@
 #include "menu.h"
-#include <jm/jmui.h>
+#include <jm/jmlib.h>
 
 Menu::Menu(QWidget *parent /* = 0 */)
     : QWidget (parent)

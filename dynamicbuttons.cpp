@@ -1,5 +1,5 @@
 #include "dynamicbuttons.h"
-#include <jm/jmui.h>
+#include <jm/jmlib.h>
 
 DynamicButtons::DynamicButtons(Qt::Orientations orientation,
     QWidget *parent)

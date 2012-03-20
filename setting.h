@@ -2,11 +2,10 @@
 #define SETTING_H
 
 #include <jm/jmserialport.h>
+#include <jm/jmlib.h>
 #include <QtGui/QDialog>
 #include <QtCore/QSettings>
 #include <QtCore/QTimer>
-#include <jm/jmcommboxversion.h>
-#include <jm/jmcommboxport.h>
 #include "ui_setting.h"
 
 class Setting : public QDialog

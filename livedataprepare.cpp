@@ -1,6 +1,5 @@
 #include "livedataprepare.h"
-#include "jm/jmldarray.h"
-#include "jm/jmui.h"
+#include <jm/jmlib.h>
 
 LiveDataPrepare::LiveDataPrepare(QWidget *parent /* = 0 */)
     : QWidget(parent)

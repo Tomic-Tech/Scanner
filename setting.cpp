@@ -1,6 +1,5 @@
 #include "setting.h"
-#include <jm/jmcommboxfactory.h>
-#include <jm/jmcommboxport.h>
+#include <jm/jmlib.h>
 
 Setting::Setting(QWidget *parent, Qt::WFlags flags)
 	: QDialog(parent, flags)
@@ -11,7 +10,9 @@ Setting::Setting(QWidget *parent, Qt::WFlags flags)
 {
 	_ui.setupUi(this);
     _commboxVer = (JMCommboxVersion)_setting.value("CommboxVer", QVariant(int(JM_COMMBOX_V1))).toInt();
+    _ui.commboxVersion->setCurrentIndex(_commboxVer);
     _portType = (JMCommboxPortType)_setting.value("PortType", QVariant(int(JM_COMMBOX_PORT_SERIAL_PORT))).toInt();
+    _ui.commboxPort->setCurrentIndex(_portType);
 
     jm_commbox_factory_set_commbox_version(_commboxVer);
     jm_commbox_port_set_type(_portType);
@@ -22,6 +23,7 @@ Setting::Setting(QWidget *parent, Qt::WFlags flags)
 
     if (_portType == JM_COMMBOX_PORT_SERIAL_PORT)
     {
+        jm_commbox_port_set_pointer(_serial_port);
         _spReadTimer->start(1);
         _spWriteTimer->start(1);
     }
@@ -47,22 +49,15 @@ void Setting::spRead()
 {
     static guint8 buff[1024];
     static size_t avail = 0;
-    if (jm_serial_port_is_open(_serial_port))
-    {
-        avail = jm_serial_port_bytes_available(_serial_port);
-        if (avail > 0)
-        {
-            jm_serial_port_read(_serial_port, buff, avail);
-            jm_commbox_port_push_in_deque(buff, avail);
-        }
-    }
+    avail = jm_serial_port_bytes_available(_serial_port);
+    jm_serial_port_read(_serial_port, buff, avail);
+    jm_commbox_port_push_in_deque(buff, avail);
 }
 
 void Setting::spWrite()
 {
     static GByteArray *buff = NULL;
-    if (jm_serial_port_is_open(_serial_port) && 
-        jm_commbox_port_out_deque_available())
+    if (jm_commbox_port_out_deque_available())
     {
         if (jm_commbox_port_pop_out_deque(&buff))
         {
@@ -84,6 +79,7 @@ void Setting::onOk()
 
     if (_portType == JM_COMMBOX_PORT_SERIAL_PORT)
     {
+        jm_commbox_port_set_pointer(_serial_port);
         _spReadTimer->start(1);
         _spWriteTimer->start(1);
     }
