@@ -26,7 +26,7 @@ private:
     JMCommboxPortType _portType;
     QTimer *_spReadTimer;
     QTimer *_spWriteTimer;
-    JMSerialPort *_serial_port;
+    JMSerialPort *_serialPort;
 };
 
 #endif // SETTING_H

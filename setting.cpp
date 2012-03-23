@@ -6,7 +6,7 @@ Setting::Setting(QWidget *parent, Qt::WFlags flags)
     , _setting("Tomic", "C168 II")
     , _spReadTimer(new QTimer(this))
     , _spWriteTimer(new QTimer(this))
-    , _serial_port(jm_serial_port_new())
+    , _serialPort(jm_serial_port_new())
 {
 	_ui.setupUi(this);
     _commboxVer = (JMCommboxVersion)_setting.value("CommboxVer", QVariant(int(JM_COMMBOX_V1))).toInt();
@@ -23,7 +23,7 @@ Setting::Setting(QWidget *parent, Qt::WFlags flags)
 
     if (_portType == JM_COMMBOX_PORT_SERIAL_PORT)
     {
-        jm_commbox_port_set_pointer(_serial_port);
+        jm_commbox_port_set_pointer(_serialPort);
         _spReadTimer->start(1);
         _spWriteTimer->start(1);
     }
@@ -49,9 +49,12 @@ void Setting::spRead()
 {
     static guint8 buff[1024];
     static size_t avail = 0;
-    avail = jm_serial_port_bytes_available(_serial_port);
-    jm_serial_port_read(_serial_port, buff, avail);
-    jm_commbox_port_push_in_deque(buff, avail);
+    avail = jm_serial_port_bytes_available(_serialPort);
+	if (avail > 0)
+	{
+		jm_serial_port_read(_serialPort, buff, avail);
+		jm_commbox_port_push_in_deque(buff, avail);
+	}
 }
 
 void Setting::spWrite()
@@ -61,7 +64,7 @@ void Setting::spWrite()
     {
         if (jm_commbox_port_pop_out_deque(&buff))
         {
-            jm_serial_port_write(_serial_port, buff->data, buff->len);
+            jm_serial_port_write(_serialPort, buff->data, buff->len);
         }
     }
 }
@@ -79,7 +82,7 @@ void Setting::onOk()
 
     if (_portType == JM_COMMBOX_PORT_SERIAL_PORT)
     {
-        jm_commbox_port_set_pointer(_serial_port);
+        jm_commbox_port_set_pointer(_serialPort);
         _spReadTimer->start(1);
         _spWriteTimer->start(1);
     }

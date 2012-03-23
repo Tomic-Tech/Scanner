@@ -1,5 +1,5 @@
 #include "register.h"
-#include <jm/jmauth.h>
+#include <jm/jmlib.h>
 
 Register::Register(QWidget *parent /* = 0 */, Qt::WFlags flags /* = 0 */)
     : QDialog(parent, flags)

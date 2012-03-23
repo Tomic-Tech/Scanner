@@ -1,5 +1,4 @@
 #include "livedatamodel.h"
-#include <jm/jmdb.h>
 #include <jm/jmlib.h>
 
 LiveDataModel::LiveDataModel(Mode mode, QObject *parent /* = 0 */)
