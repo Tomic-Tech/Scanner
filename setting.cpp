@@ -59,14 +59,13 @@ void Setting::spRead()
 
 void Setting::spWrite()
 {
-    static GByteArray *buff = NULL;
-    if (jm_commbox_port_out_deque_available())
-    {
-        if (jm_commbox_port_pop_out_deque(&buff))
-        {
-            jm_serial_port_write(_serialPort, buff->data, buff->len);
-        }
-    }
+    QByteArray data;
+	size_t avail = jm_commbox_port_out_deque_available();
+	data.resize(avail);
+	if (jm_commbox_port_pop_out_deque((guint8*)data.data(), data.size()))
+	{
+		jm_serial_port_write(_serialPort, (const guint8*)data.data(), data.size());
+	}
 }
 
 void Setting::onOk() 

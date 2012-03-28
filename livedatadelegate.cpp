@@ -1,5 +1,5 @@
 #include "livedatadelegate.h"
-#include <jm/jmldarray.h>
+#include <jm/jmlib.h>
 
 LiveDataDelegate::LiveDataDelegate(Mode mode, QObject *parent)
     : QItemDelegate(parent)

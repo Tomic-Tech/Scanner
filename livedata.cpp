@@ -1,5 +1,5 @@
 #include "livedata.h"
-#include <jm/jmldarray.h>
+#include <jm/jmlib.h>
 
 LiveData::LiveData(QWidget *parent /* = 0 */)
     : QWidget(parent)

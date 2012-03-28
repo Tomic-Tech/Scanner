@@ -182,7 +182,7 @@ void Manager::addWindow(const QString &key, QWidget *widget)
 
 int Manager::exec()
 {
-    if (jm_auth_check_reg())
+    if (!jm_auth_check_reg())
     {
         Register r;
         if (r.exec() != QDialog::Accepted)
