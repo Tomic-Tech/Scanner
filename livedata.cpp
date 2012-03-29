@@ -49,8 +49,8 @@ void LiveData::showEvent(QShowEvent *event)
     jm_ld_array_deploy_showed_index();
     _model = new LiveDataModel(LiveDataModel::LiveDataMode);
     _ui.liveDataTable->setModel(_model);
-    _ui.liveDataTable->horizontalHeader()->setResizeMode(1, QHeaderView::ResizeToContents);
-    _ui.liveDataTable->horizontalHeader()->setResizeMode(2, QHeaderView::ResizeToContents);
+    //_ui.liveDataTable->horizontalHeader()->setResizeMode(1, QHeaderView::ResizeToContents);
+    //_ui.liveDataTable->horizontalHeader()->setResizeMode(2, QHeaderView::ResizeToContents);
     QWidget::showEvent(event);
 }
 
