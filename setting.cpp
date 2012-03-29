@@ -47,7 +47,7 @@ Setting::~Setting()
 
 void Setting::spRead()
 {
-    static guint8 buff[1024];
+    static quint8 buff[1024];
     static size_t avail = 0;
     avail = jm_serial_port_bytes_available(_serialPort);
 	if (avail > 0)
@@ -62,9 +62,9 @@ void Setting::spWrite()
     QByteArray data;
 	size_t avail = jm_commbox_port_out_deque_available();
 	data.resize(avail);
-	if (jm_commbox_port_pop_out_deque((guint8*)data.data(), data.size()))
+	if (jm_commbox_port_pop_out_deque((quint8*)data.data(), data.size()))
 	{
-		jm_serial_port_write(_serialPort, (const guint8*)data.data(), data.size());
+		jm_serial_port_write(_serialPort, (const quint8*)data.data(), data.size());
 	}
 }
 

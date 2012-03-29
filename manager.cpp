@@ -9,7 +9,7 @@ Manager::Manager(int &argc, char **argv)
     , _windowHash()
     , _uiTimer(new QTimer(this))
 {
-    QString dir = qApp->applicationDirPath().append(G_DIR_SEPARATOR_S);
+    QString dir = qApp->applicationDirPath().append("/");
     jm_lib_init(dir.toUtf8().data());
 
     _window.setWindowTitle(trUtf8("JMScanner"));
@@ -55,7 +55,7 @@ Manager::~Manager()
 
 void Manager::loadTranslateFiles()
 {
-    QString fileName = QString::fromUtf8("%1"G_DIR_SEPARATOR_S"%2")
+    QString fileName = QString::fromUtf8("%1/%2")
         .arg(qApp->applicationDirPath())
         .arg(UtilsInst().getTheSystemLang());
     if (_ts.load(fileName))
