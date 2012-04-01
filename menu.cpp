@@ -53,6 +53,7 @@ void Menu::on_menuList_doubleClicked(const QModelIndex &index)
         QString item = _model.data(index).toString();
         jm_ui_set_btn_clicked(".");
         jm_ui_set_menu_selected(item.toUtf8().data());
+		jm_log_write("Menu", item.toUtf8().data());
     }
 }
 

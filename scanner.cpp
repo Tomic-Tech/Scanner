@@ -91,6 +91,7 @@ void Scanner::on_vehicleList_doubleClicked(const QModelIndex &index)
                 v.vehiclePath(),
                 v.vehiclePath());
             _thread.start(QThread::IdlePriority);
+			jm_log_write("Vehicle", v.vehicleName().toUtf8().data());
         }
     }
 }

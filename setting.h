@@ -17,16 +17,11 @@ public:
 	~Setting();
 private slots:
     void onOk();
-    void spRead();
-    void spWrite();
 private:
 	Ui::SettingClass _ui;
     QSettings _setting;
     JMCommboxVersion _commboxVer;
     JMCommboxPortType _portType;
-    QTimer *_spReadTimer;
-    QTimer *_spWriteTimer;
-    JMSerialPort *_serialPort;
 };
 
 #endif // SETTING_H

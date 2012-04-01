@@ -23,7 +23,7 @@
       </font>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -37,6 +37,9 @@
        <family>微软雅黑</family>
        <pointsize>12</pointsize>
       </font>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
