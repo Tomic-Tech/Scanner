@@ -5,11 +5,11 @@
 #include "ui_messagebox.h"
 #include "dynamicbuttons.h"
 
-class MessageBox : public QDialog
+class MsgBox : public QDialog
 {
     Q_OBJECT
 public:
-    MessageBox(QWidget *parent = 0, Qt::WFlags flags = 0);
+    MsgBox(QWidget *parent = 0, Qt::WFlags flags = 0);
     DynamicButtons *dynamicButtons();
 protected:
     void changeEvent(QEvent *event);

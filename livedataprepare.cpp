@@ -1,5 +1,5 @@
 #include "livedataprepare.h"
-#include <jm/jmlib.h>
+#include <jm/system/app.hpp>
 
 LiveDataPrepare::LiveDataPrepare(QWidget *parent /* = 0 */)
     : QWidget(parent)
@@ -32,10 +32,10 @@ void LiveDataPrepare::btnClked(int index)
     case 0:
         {
             bool atLeastOne = false;
-            size_t size = jm_ld_array_size();
+            size_t size = JM::System::app().ldVecPtr->size();
             for (size_t i = 0; i < size; i++)
             {
-                if (jm_ld_array_get_enabled(i))
+                if (JM::System::app().ldVecPtr->at(i)->enabled())
                 {
                     atLeastOne = true;
                     break;
@@ -43,7 +43,7 @@ void LiveDataPrepare::btnClked(int index)
             }
             if (atLeastOne)
             {
-                jm_ui_set_btn_clicked(".");
+                JM::System::app().ui().setBtnClicked(".");
             }
         }
         break;
@@ -54,7 +54,7 @@ void LiveDataPrepare::btnClked(int index)
         }
         break;
     case 2:
-        jm_ui_set_btn_clicked("..");
+        JM::System::app().ui().setBtnClicked("..");
         break;
     }
 }
@@ -73,7 +73,7 @@ void LiveDataPrepare::changeEvent(QEvent *event)
 
 void LiveDataPrepare::showEvent(QShowEvent *event)
 {
-    jm_ld_array_deploy_enabled_index();
+    JM::System::app().ldVecPtr->deployEnabledIndex();
     LiveDataModel *model = _model;
     _model = new LiveDataModel(LiveDataModel::PrepareMode);
     _ui.tableView->setModel(_model);

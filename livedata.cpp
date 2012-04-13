@@ -1,5 +1,5 @@
 #include "livedata.h"
-#include <jm/jmlib.h>
+#include <jm/system/app.hpp>
 
 LiveData::LiveData(QWidget *parent /* = 0 */)
     : QWidget(parent)
@@ -46,7 +46,7 @@ void LiveData::changeEvent(QEvent *event)
 
 void LiveData::showEvent(QShowEvent *event)
 {
-    jm_ld_array_deploy_showed_index();
+    JM::System::app().ldVecPtr->deployShowedIndex();
     _model = new LiveDataModel(LiveDataModel::LiveDataMode);
     _ui.liveDataTable->setModel(_model);
     //_ui.liveDataTable->horizontalHeader()->setResizeMode(1, QHeaderView::ResizeToContents);

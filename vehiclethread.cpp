@@ -1,5 +1,5 @@
 #include "vehiclethread.h"
-#include <jm/jmlib.h>
+#include <jm/system/app.hpp>
 
 VehicleThread::VehicleThread(QObject *parent /* = 0 */)
     : QThread(parent)
@@ -22,7 +22,7 @@ void VehicleThread::init(const QString &name, const QString &path,
 
 void VehicleThread::run()
 {    
-    jm_vehicle_load_script(_name.toUtf8().data(),
+    JM::System::app().vldr().run(_name.toUtf8().data(),
         _path.toUtf8().data(),
         _dbName.toUtf8().data());
 }

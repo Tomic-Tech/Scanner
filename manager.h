@@ -1,10 +1,10 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include <jm/jmui.h>
 #include <QtGui>
 #include <QtCore>
 #include <QTranslator>
+#include <jm/system/app.hpp>
 #include "scanner.h"
 #include "scannerpresenter.h"
 #include "messagebox.h"
@@ -42,7 +42,7 @@ private:
     void troubleCodeInit();
     void liveDataPrepareInit();
     void liveDataInit();
-    void dealMsg(JMUIMessage *msg);
+    void dealMsg(JM::UI::Message::Msg *msg);
 public slots:
     void switchWindow();
     int exec();
@@ -58,7 +58,7 @@ private:
 
     Scanner *_scannerWindow;
     ScannerPresenter *_scannerPresenter;
-    MessageBox *_msgBox;
+    MsgBox *_msgBox;
     MessageBoxPresenter *_msgBoxPresenter;
     Menu *_menu;
     MenuPresenter *_menuPresenter;

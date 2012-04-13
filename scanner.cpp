@@ -1,5 +1,5 @@
 #include "scanner.h"
-#include <jm/jmlib.h>
+#include <jm/system/app.hpp>
 #include "register.h"
 
 Scanner::Scanner(QWidget *parent, Qt::WFlags flags)
@@ -45,7 +45,7 @@ void Scanner::showRegister()
 void Scanner::scanVehicles()
 {
     _model.removeRows(0, _model.rowCount());
-    QDir dir(QString::fromUtf8(jm_vehicles_dir()));
+    QDir dir(QString::fromStdString(JM::System::app().vldr().path()));
     if (dir.exists())
     {
         dir.setFilter(QDir::Dirs | QDir::NoSymLinks);
@@ -91,7 +91,6 @@ void Scanner::on_vehicleList_doubleClicked(const QModelIndex &index)
                 v.vehiclePath(),
                 v.vehiclePath());
             _thread.start(QThread::IdlePriority);
-			jm_log_write("Vehicle", v.vehicleName().toUtf8().data());
         }
     }
 }

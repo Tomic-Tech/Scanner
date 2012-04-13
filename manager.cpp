@@ -1,5 +1,5 @@
 #include "manager.h"
-#include <jm/jmlib.h>
+#include <jm/system/app.hpp>
 #include "register.h"
 #include "utils.h"
 
@@ -10,7 +10,7 @@ Manager::Manager(int &argc, char **argv)
     , _uiTimer(new QTimer(this))
 {
     QString dir = qApp->applicationDirPath().append("/");
-    jm_lib_init(dir.toUtf8().data());
+    JM::System::app().init(dir.toStdString());
 
     _window.setWindowTitle(trUtf8("JMScanner"));
     _window.setLayout(&_layout);
@@ -50,7 +50,6 @@ Manager::~Manager()
     delete _msgBox;
     delete _scannerPresenter;
     delete _scannerWindow;
-    jm_lib_destroy();
 }
 
 void Manager::loadTranslateFiles()
@@ -79,7 +78,7 @@ void Manager::scannerInit()
 void Manager::msgBoxInit()
 {
     _msgBoxPresenter = new MessageBoxPresenter(this);
-    _msgBox = new MessageBox();
+    _msgBox = new MsgBox();
 
     connect(_msgBoxPresenter, SIGNAL(sendShow()), _msgBox, SLOT(show()));
     connect(_msgBoxPresenter, SIGNAL(sendHide()), _msgBox, SLOT(hide()));
@@ -182,7 +181,7 @@ void Manager::addWindow(const QString &key, QWidget *widget)
 
 int Manager::exec()
 {
-    if (!jm_auth_check_reg())
+    if (!JM::System::app().reg().checkReg())
     {
         Register r;
         if (r.exec() != QDialog::Accepted)
@@ -242,74 +241,74 @@ LiveDataPresenter* Manager::liveDataPresenter() const
     return _liveDataPresenter;
 }
 
-void Manager::dealMsg(JMUIMessage *msg)
+void Manager::dealMsg(JM::UI::Message::Msg *msg)
 {
     if (msg != NULL)
     {
         switch(msg->type)
         {
-        case JM_UI_MSG_BOX_BTN_CLR:
+        case JM::UI::Message::MsgBoxBtnClr:
             messageBoxPresenter()->btnClr();
             break;
-        case JM_UI_MSG_BOX_ADD_BTN:
-            messageBoxPresenter()->addBtn(QString::fromUtf8(msg->message));
+        case JM::UI::Message::MsgBoxAddBtn:
+            messageBoxPresenter()->addBtn(QString::fromStdString(msg->msg));
             break;
-        case JM_UI_MSG_BOX_SET_MSG:
-            messageBoxPresenter()->setMsg(QString::fromUtf8(msg->message));
+        case JM::UI::Message::MsgBoxSetMsg:
+            messageBoxPresenter()->setMsg(QString::fromStdString(msg->msg));
             break;
-        case JM_UI_MSG_BOX_SET_TITLE:
-            messageBoxPresenter()->setTitle(QString::fromUtf8(msg->message));
+        case JM::UI::Message::MsgBoxSetTitile:
+            messageBoxPresenter()->setTitle(QString::fromStdString(msg->msg));
             break;
-        case JM_UI_MSG_BOX_SHOW:
+        case JM::UI::Message::MsgBoxShow:
             messageBoxPresenter()->show();
             break;
-        case JM_UI_MSG_BOX_HIDE:
+        case JM::UI::Message::MsgBoxHide:
             messageBoxPresenter()->hide();
             break;
-        case JM_UI_MENU_ITEM_CLR:
+        case JM::UI::Message::MenuItemClr:
             menuPresenter()->itemClr();
             break;
-        case JM_UI_MENU_ADD_ITEM:
-            menuPresenter()->addItem(QString::fromUtf8(msg->message));
+        case JM::UI::Message::MenuAddItem:
+            menuPresenter()->addItem(QString::fromStdString(msg->msg));
             break;
-        case JM_UI_MENU_SHOW:
+        case JM::UI::Message::MenuShow:
             menuPresenter()->show();
             break;
-        case JM_UI_TC_ITEM_CLR:
+        case JM::UI::Message::TcItemClr:
             troubleCodePresenter()->itemClr();
             break;
-        case JM_UI_TC_ADD_ITEM:
+        case JM::UI::Message::TcAddItem:
             {
-                QString str = QString::fromUtf8(msg->message);
+                QString str = QString::fromStdString(msg->msg);
                 QStringList strl = str.split(QChar('|'));
                 troubleCodePresenter()->addItem(strl[0], strl[1]);
             }
             break;
-        case JM_UI_TC_ADD_BTN:
-            troubleCodePresenter()->addBtn(QString::fromUtf8(msg->message));
+        case JM::UI::Message::TcAddBtn:
+            troubleCodePresenter()->addBtn(QString::fromStdString(msg->msg));
             break;
-        case JM_UI_TC_BTN_CLR:
+        case JM::UI::Message::TcBtnClr:
             troubleCodePresenter()->btnClr();
             break;
-        case JM_UI_TC_SHOW:
+        case JM::UI::Message::TcShow:
             troubleCodePresenter()->show();
             break;
-        case JM_UI_LD_PREPARE_SHOW:
+        case JM::UI::Message::LdPrepareShow:
             liveDataPreparePresenter()->show();
             break;
-        case JM_UI_LD_SHOW:
+        case JM::UI::Message::LdShow:
             liveDataPresenter()->show();
             break;
-        case JM_UI_LD_BTN_CLR:
+        case JM::UI::Message::LdBtnClr:
             liveDataPresenter()->btnClr();
             break;
-        case JM_UI_LD_ADD_BTN:
-            liveDataPresenter()->addBtn(QString::fromUtf8(msg->message));
+        case JM::UI::Message::LdAddBtn:
+            liveDataPresenter()->addBtn(QString::fromStdString(msg->msg));
             break;
-        case JM_UI_LD_SET_VALUE:
+        case JM::UI::Message::LdSetValue:
             {
                 QStringList strl = 
-                    QString::fromUtf8(msg->message).split(QChar('|'));
+                    QString::fromStdString(msg->msg).split(QChar('|'));
                 int index = strl[0].toInt();
                 QString value = strl[1];
                 liveDataPresenter()->setValue(index, value);
@@ -318,16 +317,16 @@ void Manager::dealMsg(JMUIMessage *msg)
         default:
             break;
         }
-        jm_ui_msg_free(msg);
+        delete msg;
     }
 }
 
 void Manager::uiUpdate()
 {
-    size_t msg_count = jm_ui_msg_count();
+    size_t msg_count = JM::System::app().ui().msgCount();
     while(msg_count)
     {
-        JMUIMessage *msg = jm_ui_pop_msg();
+        JM::UI::Message::Msg *msg = JM::System::app().ui().popMsg();
         dealMsg(msg);
         msg_count--;
     }

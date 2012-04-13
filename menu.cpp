@@ -1,5 +1,5 @@
 #include "menu.h"
-#include <jm/jmlib.h>
+#include <jm/system/app.hpp>
 
 Menu::Menu(QWidget *parent /* = 0 */)
     : QWidget (parent)
@@ -25,7 +25,7 @@ void Menu::btnClked(int index)
         on_menuList_doubleClicked(_ui.menuList->currentIndex());
         break;
     case 1:
-        jm_ui_set_btn_clicked("..");
+        JM::System::app().ui().setBtnClicked("..");
         break;
     }
 }
@@ -51,9 +51,8 @@ void Menu::on_menuList_doubleClicked(const QModelIndex &index)
     if (index.isValid())
     {
         QString item = _model.data(index).toString();
-        jm_ui_set_btn_clicked(".");
-        jm_ui_set_menu_selected(item.toUtf8().data());
-		jm_log_write("Menu", item.toUtf8().data());
+        JM::System::app().ui().setBtnClicked(".");
+        JM::System::app().ui().setMenuSelected(item.toUtf8().data());
     }
 }
 

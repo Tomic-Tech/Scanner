@@ -1,5 +1,5 @@
 #include "livedatadelegate.h"
-#include <jm/jmlib.h>
+#include <jm/system/app.hpp>
 
 LiveDataDelegate::LiveDataDelegate(Mode mode, QObject *parent)
     : QItemDelegate(parent)
@@ -13,7 +13,7 @@ void LiveDataDelegate::updateEditorGeometry(QWidget *editor,
 {
     if (_mode == PrepareMode)
     {
-        if (jm_ld_array_get_enabled(index.row()))
+        if (JM::System::app().ldVecPtr->at(index.row())->enabled())
         {
             editor->setGeometry(option.rect);
         }
@@ -24,8 +24,8 @@ void LiveDataDelegate::updateEditorGeometry(QWidget *editor,
     }
     else
     {
-        if (jm_ld_array_get_enabled(index.row()) &&
-            jm_ld_array_get_showed(index.row()))
+        if (JM::System::app().ldVecPtr->at(index.row())->enabled() &&
+            JM::System::app().ldVecPtr->at(index.row())->showed())
         {
             editor->setGeometry(option.rect);
         }

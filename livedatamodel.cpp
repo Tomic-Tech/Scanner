@@ -1,5 +1,5 @@
 #include "livedatamodel.h"
-#include <jm/jmlib.h>
+#include <jm/system/app.hpp>
 
 LiveDataModel::LiveDataModel(Mode mode, QObject *parent /* = 0 */)
     : QAbstractTableModel(parent)
@@ -11,11 +11,11 @@ int LiveDataModel::rowCount(const QModelIndex &parent) const
 {
     if (_mode == PrepareMode)
     {
-        return jm_ld_array_enabled_size();
+        return JM::System::app().ldVecPtr->enabledSize();
     }
     else
     {
-        return jm_ld_array_showed_size();
+        return JM::System::app().ldVecPtr->showedSize();
     }
 }
 
@@ -33,6 +33,7 @@ int LiveDataModel::columnCount(const QModelIndex &parent) const
 
 QVariant LiveDataModel::data(const QModelIndex &index, int role) const
 {
+    using namespace JM::System;
     if (!index.isValid())
         return QVariant();
 
@@ -43,17 +44,19 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
         case Qt::DisplayRole:
             if (index.column() == 0)
             {
-                return QString::fromUtf8(jm_ld_array_get_short_name(jm_ld_array_get_enabled_index(index.row())));
+                return QString::fromStdString(
+                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->shortName());
             }
             if (index.column() == 1)
             {
-                return QString::fromUtf8(jm_ld_array_get_content(jm_ld_array_get_enabled_index(index.row())));
+                return QString::fromStdString(
+                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->content());
             }
             break;
         case Qt::CheckStateRole:
             if (index.column() == 0)
             {
-                return jm_ld_array_get_showed(jm_ld_array_get_enabled_index(index.row())) ? Qt::Checked : Qt::Unchecked;
+                return app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->showed() ? Qt::Checked : Qt::Unchecked;
             }
         }
     }
@@ -63,23 +66,28 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
         {
             if (index.column() == 0)
             {
-                return QString::fromUtf8(jm_ld_array_get_short_name(jm_ld_array_get_showed_index(index.row())));
+                return QString::fromStdString(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->shortName());
             }
             else if (index.column() == 1)
             {
-                return QString::fromUtf8(jm_ld_array_get_content(jm_ld_array_get_showed_index(index.row())));
+                return QString::fromStdString(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->content());
             }
             else if (index.column() == 2)
             {
-                return QString::fromUtf8(jm_ld_array_get_value(jm_ld_array_get_showed_index(index.row())));
+                return QString::fromStdString(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->value());
             }
             else if (index.column() == 3)
             {
-                return QString::fromUtf8(jm_ld_array_get_unit(jm_ld_array_get_showed_index(index.row())));
+                return QString::fromStdString(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->unit());
             }
             else if (index.column() == 4)
             {
-                return QString::fromUtf8(jm_ld_array_get_default_value(jm_ld_array_get_showed_index(index.row())));
+                return QString::fromStdString(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->defaultValue());
             }
         }
     }
@@ -88,13 +96,15 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
 
 void LiveDataModel::setData(int index, const QString &value)
 {
+    using namespace JM::System;
     if (_mode == PrepareMode)
         return;
-    setData(this->index(jm_ld_array_query_showed_position(index), 2), QVariant(value));
+    setData(this->index(app().ldVecPtr->queryShowedPosition(index), 2), QVariant(value));
 }
 
 bool LiveDataModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
+    using namespace JM::System;
     if (!index.isValid())
         return false;
 
@@ -107,29 +117,23 @@ bool LiveDataModel::setData(const QModelIndex &index, const QVariant &value, int
             {
                 if (value.type() == QVariant::String)
                 {
-                    jm_ld_array_set_short_name(jm_ld_array_get_enabled_index(index.row()), 
-                        value.toString().toUtf8().data());
                 }
                 else
                 {
-                    jm_ld_array_set_showed(jm_ld_array_get_enabled_index(index.row()), 
-                        value.toBool() ? TRUE : FALSE);
+                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->setShowed(value.toBool());
                 }
                 emit dataChanged(index, index);
             }
 
             if (index.column() == 1)
             {
-                jm_ld_array_set_content(jm_ld_array_get_enabled_index(index.row()), 
-                    value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             break;
         case Qt::CheckStateRole:
             if (index.column() == 0)
             {
-                jm_ld_array_set_showed(jm_ld_array_get_enabled_index(index.row()), 
-                    value.toBool() ? TRUE : FALSE);
+                app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->setShowed(value.toBool());
                 emit dataChanged(index, index);
             }
             break;
@@ -142,32 +146,23 @@ bool LiveDataModel::setData(const QModelIndex &index, const QVariant &value, int
         {
             if (index.column() == 0)
             {
-                jm_ld_array_set_short_name(jm_ld_array_get_showed_index(index.row()), 
-                    value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             if (index.column() == 1)
             {
-                jm_ld_array_set_content(jm_ld_array_get_showed_index(index.row()), 
-                    value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             if (index.column() == 2)
             {
-                jm_ld_array_set_value(jm_ld_array_get_showed_index(index.row()), 
-                    value.toString().toUtf8().data());
+                // 
                 emit dataChanged(index, index);
             }
             if (index.column() == 3)
             {
-                jm_ld_array_set_unit(jm_ld_array_get_showed_index(index.row()), 
-                    value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             if (index.column() == 4)
             {
-                jm_ld_array_set_default_value(jm_ld_array_get_showed_index(index.row()), 
-                    value.toString().toUtf8().data());
                 emit dataChanged(index, index);
             }
             return true;

@@ -1,6 +1,6 @@
 #include "messagebox.h"
 
-MessageBox::MessageBox(QWidget *parent /* = 0 */, Qt::WFlags flags /* = 0 */)
+MsgBox::MsgBox(QWidget *parent /* = 0 */, Qt::WFlags flags /* = 0 */)
     : QDialog(parent, flags)
     , _ui()
     , _dynamicButtons(Qt::Horizontal, this)
@@ -11,22 +11,22 @@ MessageBox::MessageBox(QWidget *parent /* = 0 */, Qt::WFlags flags /* = 0 */)
     setWindowFlags(Qt::CustomizeWindowHint);
 }
 
-DynamicButtons* MessageBox::dynamicButtons()
+DynamicButtons* MsgBox::dynamicButtons()
 {
     return &_dynamicButtons;
 }
 
-void MessageBox::setMsg(const QString &text)
+void MsgBox::setMsg(const QString &text)
 {
     _ui.message->setPlainText(text);
 }
 
-void MessageBox::setTitle(const QString &text)
+void MsgBox::setTitle(const QString &text)
 {
     _ui.title->setText(text);
 }
 
-void MessageBox::changeEvent(QEvent *event)
+void MsgBox::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
