@@ -44,13 +44,13 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
         case Qt::DisplayRole:
             if (index.column() == 0)
             {
-                return QString::fromStdString(
-                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->shortName());
+                return QString::fromUtf8(
+                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->shortName().c_str());
             }
             if (index.column() == 1)
             {
-                return QString::fromStdString(
-                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->content());
+                return QString::fromUtf8(
+                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->content().c_str());
             }
             break;
         case Qt::CheckStateRole:
@@ -66,28 +66,28 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
         {
             if (index.column() == 0)
             {
-                return QString::fromStdString(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->shortName());
+                return QString::fromUtf8(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->shortName().c_str());
             }
             else if (index.column() == 1)
             {
-                return QString::fromStdString(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->content());
+                return QString::fromUtf8(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->content().c_str());
             }
             else if (index.column() == 2)
             {
-                return QString::fromStdString(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->value());
+                return QString::fromUtf8(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->value().c_str());
             }
             else if (index.column() == 3)
             {
-                return QString::fromStdString(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->unit());
+                return QString::fromUtf8(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->unit().c_str());
             }
             else if (index.column() == 4)
             {
-                return QString::fromStdString(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->defaultValue());
+                return QString::fromUtf8(
+                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->defaultValue().c_str());
             }
         }
     }

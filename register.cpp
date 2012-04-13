@@ -8,7 +8,7 @@ Register::Register(QWidget *parent /* = 0 */, Qt::WFlags flags /* = 0 */)
     //connect(_ui.quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
     connect(_ui.okButton, SIGNAL(clicked()), this, SLOT(onOk()));
 
-    _ui.idCode->setText(QString::fromStdString(JM::System::app().reg().queryIDCode()));
+    _ui.idCode->setText(QString::fromUtf8(JM::System::app().reg().queryIDCode().c_str()));
 }
 
 Register::~Register()

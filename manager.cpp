@@ -251,13 +251,13 @@ void Manager::dealMsg(JM::UI::Message::Msg *msg)
             messageBoxPresenter()->btnClr();
             break;
         case JM::UI::Message::MsgBoxAddBtn:
-            messageBoxPresenter()->addBtn(QString::fromStdString(msg->msg));
+            messageBoxPresenter()->addBtn(QString::fromUtf8(msg->msg.c_str()));
             break;
         case JM::UI::Message::MsgBoxSetMsg:
-            messageBoxPresenter()->setMsg(QString::fromStdString(msg->msg));
+            messageBoxPresenter()->setMsg(QString::fromUtf8(msg->msg.c_str()));
             break;
         case JM::UI::Message::MsgBoxSetTitile:
-            messageBoxPresenter()->setTitle(QString::fromStdString(msg->msg));
+            messageBoxPresenter()->setTitle(QString::fromUtf8(msg->msg.c_str()));
             break;
         case JM::UI::Message::MsgBoxShow:
             messageBoxPresenter()->show();
@@ -269,7 +269,7 @@ void Manager::dealMsg(JM::UI::Message::Msg *msg)
             menuPresenter()->itemClr();
             break;
         case JM::UI::Message::MenuAddItem:
-            menuPresenter()->addItem(QString::fromStdString(msg->msg));
+            menuPresenter()->addItem(QString::fromUtf8(msg->msg.c_str()));
             break;
         case JM::UI::Message::MenuShow:
             menuPresenter()->show();
@@ -279,13 +279,13 @@ void Manager::dealMsg(JM::UI::Message::Msg *msg)
             break;
         case JM::UI::Message::TcAddItem:
             {
-                QString str = QString::fromStdString(msg->msg);
+                QString str = QString::fromUtf8(msg->msg.c_str());
                 QStringList strl = str.split(QChar('|'));
                 troubleCodePresenter()->addItem(strl[0], strl[1]);
             }
             break;
         case JM::UI::Message::TcAddBtn:
-            troubleCodePresenter()->addBtn(QString::fromStdString(msg->msg));
+            troubleCodePresenter()->addBtn(QString::fromUtf8(msg->msg.c_str()));
             break;
         case JM::UI::Message::TcBtnClr:
             troubleCodePresenter()->btnClr();
@@ -303,12 +303,12 @@ void Manager::dealMsg(JM::UI::Message::Msg *msg)
             liveDataPresenter()->btnClr();
             break;
         case JM::UI::Message::LdAddBtn:
-            liveDataPresenter()->addBtn(QString::fromStdString(msg->msg));
+            liveDataPresenter()->addBtn(QString::fromUtf8(msg->msg.c_str()));
             break;
         case JM::UI::Message::LdSetValue:
             {
                 QStringList strl = 
-                    QString::fromStdString(msg->msg).split(QChar('|'));
+                    QString::fromUtf8(msg->msg.c_str()).split(QChar('|'));
                 int index = strl[0].toInt();
                 QString value = strl[1];
                 liveDataPresenter()->setValue(index, value);

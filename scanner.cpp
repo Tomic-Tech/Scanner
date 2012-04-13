@@ -45,7 +45,7 @@ void Scanner::showRegister()
 void Scanner::scanVehicles()
 {
     _model.removeRows(0, _model.rowCount());
-    QDir dir(QString::fromStdString(JM::System::app().vldr().path()));
+    QDir dir(QString::fromUtf8(JM::System::app().vldr().path().c_str()));
     if (dir.exists())
     {
         dir.setFilter(QDir::Dirs | QDir::NoSymLinks);
