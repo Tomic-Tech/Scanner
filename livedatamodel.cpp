@@ -1,5 +1,5 @@
 #include "livedatamodel.h"
-#include <jm/system/app.hpp>
+#include <jm/system/app.h>
 
 LiveDataModel::LiveDataModel(Mode mode, QObject *parent /* = 0 */)
     : QAbstractTableModel(parent)
@@ -11,11 +11,11 @@ int LiveDataModel::rowCount(const QModelIndex &parent) const
 {
     if (_mode == PrepareMode)
     {
-        return JM::System::app().ldVecPtr->enabledSize();
+        return JM::System::app().ldVectorPtr->enabled_size();
     }
     else
     {
-        return JM::System::app().ldVecPtr->showedSize();
+        return JM::System::app().ldVectorPtr->showed_size();
     }
 }
 
@@ -45,18 +45,18 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
             if (index.column() == 0)
             {
                 return QString::fromUtf8(
-                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->shortName().c_str());
+                    app().ldVectorPtr->at(app().ldVectorPtr->get_enabled_index(index.row()))->short_name().c_str());
             }
             if (index.column() == 1)
             {
                 return QString::fromUtf8(
-                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->content().c_str());
+                    app().ldVectorPtr->at(app().ldVectorPtr->get_enabled_index(index.row()))->content().c_str());
             }
             break;
         case Qt::CheckStateRole:
             if (index.column() == 0)
             {
-                return app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->showed() ? Qt::Checked : Qt::Unchecked;
+                return app().ldVectorPtr->at(app().ldVectorPtr->get_enabled_index(index.row()))->showed() ? Qt::Checked : Qt::Unchecked;
             }
         }
     }
@@ -67,27 +67,27 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
             if (index.column() == 0)
             {
                 return QString::fromUtf8(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->shortName().c_str());
+                    app().ldVectorPtr->at(app().ldVectorPtr->get_showed_index(index.row()))->short_name().c_str());
             }
             else if (index.column() == 1)
             {
                 return QString::fromUtf8(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->content().c_str());
+                    app().ldVectorPtr->at(app().ldVectorPtr->get_showed_index(index.row()))->content().c_str());
             }
             else if (index.column() == 2)
             {
                 return QString::fromUtf8(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->value().c_str());
+                    app().ldVectorPtr->at(app().ldVectorPtr->get_showed_index(index.row()))->value().c_str());
             }
             else if (index.column() == 3)
             {
                 return QString::fromUtf8(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->unit().c_str());
+                    app().ldVectorPtr->at(app().ldVectorPtr->get_showed_index(index.row()))->unit().c_str());
             }
             else if (index.column() == 4)
             {
                 return QString::fromUtf8(
-                    app().ldVecPtr->at(app().ldVecPtr->getShowedIndex(index.row()))->defaultValue().c_str());
+                    app().ldVectorPtr->at(app().ldVectorPtr->get_showed_index(index.row()))->default_value().c_str());
             }
         }
     }
@@ -99,7 +99,7 @@ void LiveDataModel::setData(int index, const QString &value)
     using namespace JM::System;
     if (_mode == PrepareMode)
         return;
-    setData(this->index(app().ldVecPtr->queryShowedPosition(index), 2), QVariant(value));
+    setData(this->index(app().ldVectorPtr->query_showed_position(index), 2), QVariant(value));
 }
 
 bool LiveDataModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -120,7 +120,7 @@ bool LiveDataModel::setData(const QModelIndex &index, const QVariant &value, int
                 }
                 else
                 {
-                    app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->setShowed(value.toBool());
+                    app().ldVectorPtr->at(app().ldVectorPtr->get_enabled_index(index.row()))->set_showed(value.toBool());
                 }
                 emit dataChanged(index, index);
             }
@@ -133,7 +133,7 @@ bool LiveDataModel::setData(const QModelIndex &index, const QVariant &value, int
         case Qt::CheckStateRole:
             if (index.column() == 0)
             {
-                app().ldVecPtr->at(app().ldVecPtr->getEnabledIndex(index.row()))->setShowed(value.toBool());
+                app().ldVectorPtr->at(app().ldVectorPtr->get_enabled_index(index.row()))->set_showed(value.toBool());
                 emit dataChanged(index, index);
             }
             break;
@@ -202,7 +202,7 @@ Qt::ItemFlags LiveDataModel::flags(const QModelIndex &index) const
     return QAbstractTableModel::flags(index);
 }
 
-//void LiveDataModel::addItem(const QString &shortName,
+//void LiveDataModel::addItem(const QString &short_name,
 //    const QString &content,
 //    const QString &unit,
 //    const QString &defValue,
@@ -215,14 +215,14 @@ Qt::ItemFlags LiveDataModel::flags(const QModelIndex &index) const
 //        if(_mode == PrepareMode)
 //        {
 //            insertRow(rowCount());
-//            setData(index(rowCount() - 1, 0), QVariant(shortName));
+//            setData(index(rowCount() - 1, 0), QVariant(short_name));
 //            setData(index(rowCount() - 1, 0), QVariant(false));
 //            setData(index(rowCount() - 1, 1), QVariant(content));
 //        }
 //        else
 //        {
 //            insertRow(rowCount());
-//            setData(index(rowCount() - 1, 0), QVariant(shortName));
+//            setData(index(rowCount() - 1, 0), QVariant(short_name));
 //            setData(index(rowCount() - 1, 1), QVariant(content));
 //            setData(index(rowCount() - 1, 2), QVariant(QString("")));
 //            setData(index(rowCount() - 1, 3), QVariant(unit));

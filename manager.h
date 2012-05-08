@@ -4,7 +4,7 @@
 #include <QtGui>
 #include <QtCore>
 #include <QTranslator>
-#include <jm/system/app.hpp>
+#include <jm/system/app.h>
 #include "scanner.h"
 #include "scannerpresenter.h"
 #include "messagebox.h"

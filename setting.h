@@ -1,8 +1,8 @@
 #ifndef SETTING_H
 #define SETTING_H
 
-#include <jm/system/app.hpp>
-#include <jm/diag/boxfactory.hpp>
+#include <jm/system/app.h>
+#include <jm/diag/boxfactory.h>
 #include <QtGui/QDialog>
 #include <QtCore/QSettings>
 #include <QtCore/QTimer>
@@ -21,7 +21,7 @@ private:
 	Ui::SettingClass _ui;
     QSettings _setting;
     JM::Diag::BoxFactory::Version _commboxVer;
-    JM::Diag::Commbox::Type _portType;
+    JM::Diag::BoxStream::RealType _portType;
 };
 
 #endif // SETTING_H

@@ -1,5 +1,5 @@
 #include "manager.h"
-#include <jm/system/app.hpp>
+#include <jm/system/app.h>
 #include "register.h"
 #include "utils.h"
 
@@ -181,7 +181,7 @@ void Manager::addWindow(const QString &key, QWidget *widget)
 
 int Manager::exec()
 {
-    if (!JM::System::app().reg().checkReg())
+    if (!JM::System::app().reg().check_reg())
     {
         Register r;
         if (r.exec() != QDialog::Accepted)
@@ -323,10 +323,10 @@ void Manager::dealMsg(JM::UI::Message::Msg *msg)
 
 void Manager::uiUpdate()
 {
-    size_t msg_count = JM::System::app().ui().msgCount();
+    size_t msg_count = JM::System::app().ui().msg_count();
     while(msg_count)
     {
-        JM::UI::Message::Msg *msg = JM::System::app().ui().popMsg();
+        JM::UI::Message::Msg *msg = JM::System::app().ui().pop_msg();
         dealMsg(msg);
         msg_count--;
     }

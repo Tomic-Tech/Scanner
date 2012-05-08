@@ -1,5 +1,5 @@
 #include "vehiclethread.h"
-#include <jm/system/app.hpp>
+#include <jm/system/app.h>
 
 VehicleThread::VehicleThread(QObject *parent /* = 0 */)
     : QThread(parent)

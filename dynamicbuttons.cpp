@@ -1,5 +1,5 @@
 #include "dynamicbuttons.h"
-#include <jm/system/app.hpp>
+#include <jm/system/app.h>
 
 DynamicButtons::DynamicButtons(Qt::Orientations orientation,
     QWidget *parent)
@@ -64,5 +64,5 @@ void DynamicButtons::btnClked()
 
 void DynamicButtons::defaultBtnClked(const QString &text)
 {
-    JM::System::app().ui().setBtnClicked(text.toUtf8().data());
+    JM::System::app().ui().set_btn_clicked(text.toUtf8().data());
 }

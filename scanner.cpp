@@ -1,5 +1,5 @@
 #include "scanner.h"
-#include <jm/system/app.hpp>
+#include <jm/system/app.h>
 #include "register.h"
 
 Scanner::Scanner(QWidget *parent, Qt::WFlags flags)
